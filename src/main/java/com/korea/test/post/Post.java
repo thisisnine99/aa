@@ -1,11 +1,10 @@
-package com.korea.test;
+package com.korea.test.post;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.korea.test.note.Note;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 
@@ -20,5 +19,7 @@ public class Post {
     private String title;
     private String content;
     private LocalDateTime createDate;
-
+    private LocalDateTime updateDate;
+    @ManyToOne
+    private Note note;
 }
