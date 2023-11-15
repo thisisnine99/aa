@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.0.7/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 <div class="wrap">
@@ -14,10 +16,8 @@
     <div class="content-wrap">
         <!-- 왼쪽노트메뉴 -->
         <div class="side-menu">
-            <ul>
-                <li th:each="note : ${noteList}" th:class="${note.id == targetNote.id} ? 'now' : ''">
-                    <a th:href="@{|/note/${note.id}|}" th:text="${note.title}"></a>
-                </li>
+            <ul class="menu rounded-box">
+                <li th:replace="~{/fragments :: tree(${targetNote}, ${noteList})}"></li>
             </ul>
             <div>
                 <form action="/note/create" method="post">
@@ -28,6 +28,12 @@
                 <form action="/note/delete" method="post">
                     <input type="hidden" name="targetNoteid" th:value="${targetNote.id}">
                     <input type="button" value="삭제" onclick="confirmAction(this, DELETE)">
+                </form>
+            </div>
+            <div>
+                <form action="/note/groupAdd" method="post">
+                    <input type="hidden" name="targetNoteid" th:value="${targetNote.id}">
+                    <input type="submit" value="그룹추가">
                 </form>
             </div>
         </div>

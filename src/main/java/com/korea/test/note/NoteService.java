@@ -13,7 +13,7 @@ public class NoteService {
     private final NoteRepository noteRepository;
 
     public List<Note> getList() {
-        return noteRepository.findAll();
+        return noteRepository.findByParentId(null);
     }
 
     public Note findById(Long targetNoteid) {
@@ -26,6 +26,11 @@ public class NoteService {
         note.setCreateDate(LocalDateTime.now());
         noteRepository.save(note);
         return note;
+    }
+
+    public void groutAdd(Note childNote, Note parentNote) {
+        childNote.setParent(parentNote);
+        noteRepository.save(childNote);
     }
 
     public List<Note> getAllNote() {

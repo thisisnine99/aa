@@ -57,4 +57,5 @@ public class PostController {
         }
         return "redirect:/note/" + targetNote.getId();
     }
+
 }

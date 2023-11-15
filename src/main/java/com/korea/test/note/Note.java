@@ -20,4 +20,10 @@ public class Note {
     private LocalDateTime createDate;
     @OneToMany(mappedBy = "note", cascade = CascadeType.REMOVE)
     private List<Post> postList;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
+    private List<Note> childList;
+
+    @ManyToOne
+    private Note parent;
 }

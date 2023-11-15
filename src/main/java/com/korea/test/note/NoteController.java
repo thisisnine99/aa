@@ -62,12 +62,12 @@ public class NoteController {
         return "redirect:/";
     }
 
-    public int findIndexNum(Long targetNoteid) {
-        for (int i = 0; i < noteService.getAllNote().size(); i++) {
-            if (targetNoteid == noteService.getAllNote().get(i).getId()) {
-                return i;
-            }
-        }
-        return 0;
+    @PostMapping("/groupAdd")
+    public String groupAdd(Long targetNoteid) {
+        Note childNote = noteService.createNote();
+        Note parentNote = noteService.findById(targetNoteid);
+        postService.writePost(childNote);
+        noteService.groutAdd(childNote, parentNote);
+        return "redirect:/";
     }
 }
